@@ -6,19 +6,28 @@ import 'dart:math';
 import 'game.dart';
 
 void main() {
-  const maxRandom = 100;
-  var game = Game();
+  while (true) {
+    playGame();
+    String? input;
+    do {
+      stdout.write('Play again? (Y/N): ');
+      input = stdin.readLineSync();
+    } while (input!.toLowerCase() != 'y' && input.toUpperCase() != 'n');
 
+    if (input.toLowerCase() == 'n') break;
+  }
+}
+void playGame(){
+
+  var game = Game();
   var isCorrect = false;
-  var check = false;
 
   print('╔════════════════════════════════════════');
   print('║            GUESS THE NUMBER            ');
   print('╟────────────────────────────────────────');
 
   do {
-
-    stdout.write('║ Guess the number between 1 and $maxRandom: ');
+    stdout.write('║ Guess the number between 1 and ${Game.maxRandom}: ');
     var input = stdin.readLineSync();
     var guess = int.tryParse(input!);
     if (guess == null) {
@@ -33,25 +42,13 @@ void main() {
       print('║ ➜ $guess is TOO LOW! ▼');
       print('╟────────────────────────────────────────');
     } else {
-      stdout.write('║ ➜ $guess is CORRECT ❤, total guesses: ');
-      print(game.guessCount);
+      print('║ ➜ $guess is CORRECT ❤, total guesses: ${game.guessCount}');
       print('╟────────────────────────────────────────');
-      print('║                 THE END                ');
-      print('╚════════════════════════════════════════');
       isCorrect = true;
     }
   } while (!isCorrect);
-   while (true){
-     stdout.write('Play again? (Y/N): ');
-     var again = stdin.readLineSync();
-     if(again == 'Y' || again == 'y'){
-       check = true;
-     }else if (again == 'N' || again == 'n'){
-       check = false;
-       break;
-     }else{
-       continue;
-     }
+      print('║                 THE END                ');
+      print('╚════════════════════════════════════════');
    }
 
-}
+

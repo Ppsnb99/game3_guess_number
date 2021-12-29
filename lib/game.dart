@@ -18,10 +18,8 @@ class Game{
       return 1;
     }else if (num < _answer!){
       return -1;
-
     }else{
       return 0;
     }
-
   }
 }
